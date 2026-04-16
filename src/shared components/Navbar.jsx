@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 const Navbar = ({ onLangChange }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isLangOpen, setIsLangOpen] = useState(false); // Mobile language dropdown state
     const [activeLang, setActiveLang] = useState('en');
     const [activeSection, setActiveSection] = useState('/');
 
-    // Hash change monitor korar jonno jeno click korle link highlight hoy
     useEffect(() => {
         const handleHashChange = () => {
             setActiveSection(window.location.hash || '/');
@@ -16,6 +16,7 @@ const Navbar = ({ onLangChange }) => {
 
     const handleLangSwitch = (lang) => {
         setActiveLang(lang);
+        setIsLangOpen(false);
         if (onLangChange) onLangChange(lang);
     };
 
@@ -26,7 +27,7 @@ const Navbar = ({ onLangChange }) => {
         { name: 'Support', href: '#cta' },
         { name: 'Access', href: '#access' },
         { name: 'Sitemap', href: '#' },
-        { name: 'Contact', href: '#contact' }, // Apnar Contact section id onujayi contact deya holo
+        { name: 'Contact', href: '#contact' },
     ];
 
     const languages = [
@@ -36,16 +37,14 @@ const Navbar = ({ onLangChange }) => {
     ];
 
     return (
-        // Glassmorphism effect: backdrop-blur and bg-white/70
         <nav className="bg-white/70 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
 
-                    {/* Logo Section styled as per image logo */}
+                    {/* Logo Section */}
                     <div className="flex items-center gap-3">
                         <div className="flex-shrink-0">
                             <div className="relative w-11 h-11 flex flex-col items-center justify-center">
-                                {/* Red Circle with top line like image logo */}
                                 <div className="absolute top-1 w-6 h-[2px] bg-[#EE1D23]"></div>
                                 <div className="w-9 h-9 bg-[#EE1D23] rounded-full"></div>
                             </div>
@@ -56,7 +55,7 @@ const Navbar = ({ onLangChange }) => {
                         </div>
                     </div>
 
-                    {/* Desktop NavLinks with Active Highlight */}
+                    {/* Desktop NavLinks */}
                     <div className="hidden lg:flex items-center space-x-6">
                         {navLinks.map((link) => (
                             <a
@@ -74,40 +73,74 @@ const Navbar = ({ onLangChange }) => {
                         ))}
                     </div>
 
-                    <div className="hidden md:flex items-center gap-2">
-                        {languages.map((lang) => (
-                            <button
-                                key={lang.code}
-                                onClick={() => handleLangSwitch(lang.code)}
-                                className={`px-4 py-2 text-sm rounded-xl transition-all font-bold border ${
-                                    activeLang === lang.code
-                                        ? 'bg-[#1A3673] text-white border-[#1A3673] shadow-md'
-                                        : 'border-gray-200 text-gray-600 hover:bg-gray-50'
-                                }`}
-                            >
-                                {lang.label}
-                            </button>
-                        ))}
-                    </div>
+                    {/* Right Side Buttons */}
+                    <div className="flex items-center gap-2">
+                        {/* Desktop Language Buttons */}
+                        <div className="hidden md:flex items-center gap-2">
+                            {languages.map((lang) => (
+                                <button
+                                    key={lang.code}
+                                    onClick={() => handleLangSwitch(lang.code)}
+                                    className={`px-4 py-2 text-sm rounded-xl transition-all font-bold border ${
+                                        activeLang === lang.code
+                                            ? 'bg-[#1A3673] text-white border-[#1A3673] shadow-md'
+                                            : 'border-gray-200 text-gray-600 hover:bg-gray-50'
+                                    }`}
+                                >
+                                    {lang.label}
+                                </button>
+                            ))}
+                        </div>
 
-                    <div className="lg:hidden flex items-center">
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="text-gray-600 hover:text-[#1A3673] focus:outline-none p-2"
-                        >
-                            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                {isOpen ? (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                ) : (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-                                )}
-                            </svg>
-                        </button>
+                        {/* Mobile Language Dropdown (Positioned left of hamburger) */}
+                        <div className="md:hidden relative">
+                            <button
+                                onClick={() => setIsLangOpen(!isLangOpen)}
+                                className="flex items-center gap-1 px-3 py-2 text-xs font-bold border border-gray-200 rounded-lg text-gray-600 bg-white/50"
+                            >
+                                {languages.find(l => l.code === activeLang)?.label}
+                                <svg className={`w-3 h-3 transition-transform ${isLangOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            
+                            {isLangOpen && (
+                                <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-100 rounded-lg shadow-xl overflow-hidden animate-in fade-in zoom-in duration-200">
+                                    {languages.map((lang) => (
+                                        <button
+                                            key={lang.code}
+                                            onClick={() => handleLangSwitch(lang.code)}
+                                            className={`block w-full text-left px-4 py-3 text-sm font-bold ${
+                                                activeLang === lang.code ? 'bg-blue-50 text-[#1A3673]' : 'text-gray-600 hover:bg-gray-50'
+                                            }`}
+                                        >
+                                            {lang.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Hamburger Menu Button */}
+                        <div className="lg:hidden">
+                            <button
+                                onClick={() => setIsOpen(!isOpen)}
+                                className="text-gray-600 hover:text-[#1A3673] focus:outline-none p-2"
+                            >
+                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    {isOpen ? (
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    ) : (
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                    )}
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* Mobile Menu */}
+            {/* Mobile Nav Links Menu */}
             <div className={`lg:hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
                 <div className="px-4 pt-2 pb-6 space-y-1 bg-white/90 backdrop-blur-lg border-t border-gray-50">
                     {navLinks.map((link) => (
@@ -127,21 +160,6 @@ const Navbar = ({ onLangChange }) => {
                             {link.name}
                         </a>
                     ))}
-                    <div className="flex flex-wrap gap-2 pt-4 mt-4 border-t border-gray-100">
-                        {languages.map((lang) => (
-                            <button
-                                key={lang.code}
-                                onClick={() => handleLangSwitch(lang.code)}
-                                className={`flex-1 py-2 text-sm rounded-lg transition-all border font-bold ${
-                                    activeLang === lang.code
-                                        ? 'bg-[#1A3673] text-white border-[#1A3673]'
-                                        : 'border-gray-200 text-gray-600'
-                                }`}
-                            >
-                                {lang.label}
-                            </button>
-                        ))}
-                    </div>
                 </div>
             </div>
         </nav>
