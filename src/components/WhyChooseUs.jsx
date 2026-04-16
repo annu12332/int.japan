@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
     Monitor,
     Users2,
@@ -81,9 +82,10 @@ const WhyChooseSection = ({ lang = 'en' }) => {
                 {/* Minimal CTA */}
                 <div className="mt-10 p-4 bg-blue-900 rounded-2xl flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
                     <p className="text-white text-xs md:text-sm font-medium">Ready to start? Bangladesh's No.1 track record center.</p>
-                    <button className="px-6 py-2 bg-red-600 text-white text-xs font-black rounded-lg hover:bg-red-700 transition-colors shadow-lg shadow-red-900/20">
+                    <Link to={"/application-form"}><button className="px-6 py-2 bg-red-600 text-white text-xs font-black rounded-lg hover:bg-red-700 transition-colors shadow-lg shadow-red-900/20">
                         Apply Now
                     </button>
+                    </Link>
                 </div>
 
             </div>

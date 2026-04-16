@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
     BookOpen,
     Clock,
@@ -157,9 +158,9 @@ const AdmissionCoursesSection = ({ lang = 'jp' }) => {
                             ))}
                         </div>
 
-                        <button className="w-full py-4 bg-blue-800 text-white font-black rounded-2xl hover:bg-red-700 transition-all shadow-lg shadow-red-900/20 active:scale-95 flex items-center justify-center gap-2">
+                        <Link to={"/application-form"}><button className="w-full py-4 bg-blue-800 text-white font-black rounded-2xl hover:bg-red-700 transition-all shadow-lg shadow-red-900/20 active:scale-95 flex items-center justify-center gap-2">
                             <Users size={18} /> Apply for Admission
-                        </button>
+                        </button></Link>
                     </div>
 
                 </div>
