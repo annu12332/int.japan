@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Navbar = ({ onLangChange }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeLang, setActiveLang] = useState('en');
+    const [activeSection, setActiveSection] = useState('/');
+
+    // Hash change monitor korar jonno jeno click korle link highlight hoy
+    useEffect(() => {
+        const handleHashChange = () => {
+            setActiveSection(window.location.hash || '/');
+        };
+        window.addEventListener('hashchange', handleHashChange);
+        return () => window.removeEventListener('hashchange', handleHashChange);
+    }, []);
 
     const handleLangSwitch = (lang) => {
         setActiveLang(lang);
@@ -10,13 +20,13 @@ const Navbar = ({ onLangChange }) => {
     };
 
     const navLinks = [
-        { name: 'Home', href: '#' },
-        { name: 'About', href: '#' },
-        { name: 'Courses', href: '#' },
-        { name: 'Support', href: '#' },
-        { name: 'Access', href: '#' },
+        { name: 'Home', href: '/' },
+        { name: 'About', href: '#wcu' },
+        { name: 'Courses', href: '#course' },
+        { name: 'Support', href: '#cta' },
+        { name: 'Access', href: '#access' },
         { name: 'Sitemap', href: '#' },
-        { name: 'Contact', href: '#' },
+        { name: 'Contact', href: '#contact' }, // Apnar Contact section id onujayi contact deya holo
     ];
 
     const languages = [
@@ -26,28 +36,38 @@ const Navbar = ({ onLangChange }) => {
     ];
 
     return (
-        <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
+        // Glassmorphism effect: backdrop-blur and bg-white/70
+        <nav className="bg-white/70 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
 
-                    <div className="flex items-center gap-4">
+                    {/* Logo Section styled as per image logo */}
+                    <div className="flex items-center gap-3">
                         <div className="flex-shrink-0">
-                            <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
-                                <div className="w-8 h-1 bg-white"></div>
+                            <div className="relative w-11 h-11 flex flex-col items-center justify-center">
+                                {/* Red Circle with top line like image logo */}
+                                <div className="absolute top-1 w-6 h-[2px] bg-[#EE1D23]"></div>
+                                <div className="w-9 h-9 bg-[#EE1D23] rounded-full"></div>
                             </div>
                         </div>
                         <div className="leading-tight">
-                            <h1 className="text-xl font-bold text-blue-800 tracking-tighter">INT JAPAN</h1>
-                            <p className="text-[10px] text-gray-500 font-medium uppercase tracking-widest">Training Center</p>
+                            <h1 className="text-xl font-bold text-[#1A3673] tracking-tighter">INT JAPAN</h1>
+                            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em]">Training Center</p>
                         </div>
                     </div>
 
+                    {/* Desktop NavLinks with Active Highlight */}
                     <div className="hidden lg:flex items-center space-x-6">
                         {navLinks.map((link) => (
                             <a
                                 key={link.name}
                                 href={link.href}
-                                className="text-gray-600 hover:text-blue-700 font-medium text-sm transition-colors"
+                                onClick={() => setActiveSection(link.href)}
+                                className={`text-sm font-bold transition-all duration-300 relative py-1
+                                    ${activeSection === link.href 
+                                        ? 'text-[#EE1D23] after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#EE1D23]' 
+                                        : 'text-gray-600 hover:text-[#1A3673]'
+                                    }`}
                             >
                                 {link.name}
                             </a>
@@ -59,9 +79,9 @@ const Navbar = ({ onLangChange }) => {
                             <button
                                 key={lang.code}
                                 onClick={() => handleLangSwitch(lang.code)}
-                                className={`px-4 py-2 text-sm rounded-xl transition-all font-medium border ${
+                                className={`px-4 py-2 text-sm rounded-xl transition-all font-bold border ${
                                     activeLang === lang.code
-                                        ? 'bg-blue-700 text-white border-blue-700 shadow-md'
+                                        ? 'bg-[#1A3673] text-white border-[#1A3673] shadow-md'
                                         : 'border-gray-200 text-gray-600 hover:bg-gray-50'
                                 }`}
                             >
@@ -73,7 +93,7 @@ const Navbar = ({ onLangChange }) => {
                     <div className="lg:hidden flex items-center">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className="text-gray-600 hover:text-blue-700 focus:outline-none p-2"
+                            className="text-gray-600 hover:text-[#1A3673] focus:outline-none p-2"
                         >
                             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 {isOpen ? (
@@ -87,13 +107,22 @@ const Navbar = ({ onLangChange }) => {
                 </div>
             </div>
 
+            {/* Mobile Menu */}
             <div className={`lg:hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
-                <div className="px-4 pt-2 pb-6 space-y-1 bg-white border-t border-gray-50">
+                <div className="px-4 pt-2 pb-6 space-y-1 bg-white/90 backdrop-blur-lg border-t border-gray-50">
                     {navLinks.map((link) => (
                         <a
                             key={link.name}
                             href={link.href}
-                            className="block px-3 py-3 text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg"
+                            onClick={() => {
+                                setActiveSection(link.href);
+                                setIsOpen(false);
+                            }}
+                            className={`block px-3 py-3 text-base font-bold rounded-lg ${
+                                activeSection === link.href 
+                                    ? 'bg-red-50 text-[#EE1D23]' 
+                                    : 'text-gray-700 hover:bg-blue-50 hover:text-[#1A3673]'
+                            }`}
                         >
                             {link.name}
                         </a>
@@ -103,9 +132,9 @@ const Navbar = ({ onLangChange }) => {
                             <button
                                 key={lang.code}
                                 onClick={() => handleLangSwitch(lang.code)}
-                                className={`flex-1 py-2 text-sm rounded-lg transition-all border ${
+                                className={`flex-1 py-2 text-sm rounded-lg transition-all border font-bold ${
                                     activeLang === lang.code
-                                        ? 'bg-blue-700 text-white border-blue-700'
+                                        ? 'bg-[#1A3673] text-white border-[#1A3673]'
                                         : 'border-gray-200 text-gray-600'
                                 }`}
                             >

@@ -49,7 +49,7 @@ const WhyChooseSection = ({ lang = 'en' }) => {
     const content = translations[lang] || translations.en;
 
     return (
-        <section className="bg-white py-12 px-4 font-sans text-slate-900">
+        <section id='wcu' className="bg-white py-12 px-4 font-sans text-slate-900">
             <div className="max-w-5xl mx-auto">
 
                 {/* Compact Header */}

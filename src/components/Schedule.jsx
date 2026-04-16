@@ -101,7 +101,7 @@ const ClassSchedule = ({ lang = 'en' }) => {
     const content = translations[lang] || translations.en;
 
     return (
-        <section className="bg-slate-50 py-12 md:py-24 px-4 overflow-hidden">
+        <section id='schedule' className="bg-slate-50 py-12 md:py-24 px-4 overflow-hidden">
             <div className="max-w-6xl mx-auto">
 
                 {/* Header Section */}

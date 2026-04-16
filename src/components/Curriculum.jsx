@@ -81,7 +81,7 @@ const CurriculumSection = ({ lang = 'en' }) => {
     const content = translations[lang] || translations.en;
 
     return (
-        <section className="bg-white py-12 md:py-20 px-4 font-sans antialiased text-slate-900">
+        <section id='curriculum' className="bg-white py-12 md:py-20 px-4 font-sans antialiased text-slate-900">
             <div className="max-w-6xl mx-auto">
 
                 {/* Compact Header */}

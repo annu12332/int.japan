@@ -86,7 +86,7 @@ const StaffSection = ({ lang = 'en' }) => {
     );
 
     return (
-        <section className="bg-gray-50 py-16 md:py-24">
+        <section id='staff' className="bg-gray-50 py-16 md:py-24">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center mb-12 md:mb-16">
                     <p className="text-red-500 font-semibold tracking-wide uppercase text-sm mb-1">{content.sectionSub}</p>

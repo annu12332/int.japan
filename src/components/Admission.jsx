@@ -59,7 +59,7 @@ const AdmissionsOverview = ({ lang = 'en' }) => {
     const content = translations[lang] || translations.en;
 
     return (
-        <section className="bg-[#f8faff] py-16 md:py-28 px-4 overflow-hidden">
+        <section id='admission' className="bg-[#f8faff] py-16 md:py-28 px-4 overflow-hidden">
             <div className="max-w-5xl mx-auto relative">
 
                 {/* Decorative Background Shapes */}
@@ -83,7 +83,7 @@ const AdmissionsOverview = ({ lang = 'en' }) => {
                 {/* Hero Card  */}
                 <div className="relative group mb-12">
                     <div className="absolute inset-0 bg-blue-600 rounded-[3rem] rotate-1 group-hover:rotate-0 transition-transform duration-500 shadow-2xl"></div>
-                    <div className="relative bg-gradient-to-br from-blue-900 to-blue-700 rounded-[3rem] p-8 md:p-16 text-center text-white overflow-hidden -rotate-1 group-hover:rotate-0 transition-transform duration-500">
+                    <div className="relative bg-gradient-to-br from-blue-900 to-blue-800 rounded-[3rem] p-8 md:p-16 text-center text-white overflow-hidden -rotate-1 group-hover:rotate-0 transition-transform duration-500">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-20 -mt-20 blur-2xl"></div>
 
                         <div className="relative z-10 space-y-6">

@@ -83,7 +83,7 @@ const AccessInfoSection = ({ lang = 'en' }) => {
     const content = translations[lang] || translations.en;
 
     return (
-        <section className="bg-white py-12 md:py-24 px-4 font-sans text-slate-900 overflow-hidden">
+        <section id='success' className="bg-white py-12 md:py-24 px-4 font-sans text-slate-900 overflow-hidden">
             <div className="max-w-7xl mx-auto">
 
                 {/* Left: Dhaka Info & Right: Tokyo Promo Card Layout */}

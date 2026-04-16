@@ -1,5 +1,12 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Facebook, Youtube, ExternalLink, ArrowRight } from 'lucide-react';
+import { 
+    HiOutlineMail, 
+    HiOutlinePhone, 
+    HiOutlineLocationMarker, 
+    HiOutlineExternalLink, 
+    HiOutlineArrowNarrowRight 
+} from "react-icons/hi";
+import { FaFacebookF, FaYoutube } from "react-icons/fa";
 
 const Footer = ({ lang = 'en' }) => {
     const translations = {
@@ -52,10 +59,10 @@ const Footer = ({ lang = 'en' }) => {
                         </p>
                         <div className="flex gap-4 pt-2">
                             <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-red-500 transition-colors">
-                                <Facebook size={20} />
+                                <FaFacebookF size={18} />
                             </a>
                             <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-red-500 transition-colors">
-                                <Youtube size={20} />
+                                <FaYoutube size={20} />
                             </a>
                         </div>
                     </div>
@@ -67,20 +74,20 @@ const Footer = ({ lang = 'en' }) => {
                         </h4>
                         <div className="space-y-4 text-sm text-blue-50/90">
                             <div className="flex gap-3">
-                                <MapPin size={18} className="text-red-400 shrink-0" />
+                                <HiOutlineLocationMarker size={20} className="text-red-400 shrink-0" />
                                 <p>House No.27/1 (Lift-8), Road No.02, Sector No.15, Uttara, Diabari, Dhaka-1230, Bangladesh.</p>
                             </div>
                             <div className="flex items-center gap-3">
-                                <Mail size={18} className="text-red-400 shrink-0" />
+                                <HiOutlineMail size={18} className="text-red-400 shrink-0" />
                                 <p>dhaka@int-japan.com</p>
                             </div>
                             <div className="flex items-center gap-3">
-                                <Phone size={18} className="text-red-400 shrink-0" />
+                                <HiOutlinePhone size={18} className="text-red-400 shrink-0" />
                                 <p className="text-xl font-black">019-4234-8132</p>
                             </div>
                         </div>
                         <button className="mt-4 flex items-center gap-2 bg-blue-800 hover:bg-blue-700 px-5 py-3 rounded-xl text-xs font-bold transition-all border border-blue-600 shadow-lg">
-                            {content.routeBtn} <ExternalLink size={14} />
+                            {content.routeBtn} <HiOutlineExternalLink size={16} />
                         </button>
                     </div>
 
@@ -91,15 +98,15 @@ const Footer = ({ lang = 'en' }) => {
                         </h4>
                         <div className="space-y-4 text-sm text-blue-50/90">
                             <div className="flex gap-3">
-                                <MapPin size={18} className="text-red-400 shrink-0" />
+                                <HiOutlineLocationMarker size={20} className="text-red-400 shrink-0" />
                                 <p>〒339-0057, 2nd Floor, 4-1-1 Honcho, Iwatsuki-ku, Saitama City, Saitama Prefecture.</p>
                             </div>
                             <div className="flex items-center gap-3">
-                                <Mail size={18} className="text-red-400 shrink-0" />
+                                <HiOutlineMail size={18} className="text-red-400 shrink-0" />
                                 <p>tokyo@int-japan.com</p>
                             </div>
                             <div className="flex items-center gap-3">
-                                <Phone size={18} className="text-red-400 shrink-0" />
+                                <HiOutlinePhone size={18} className="text-red-400 shrink-0" />
                                 <p className="text-xl font-black">048-757-8232</p>
                             </div>
                         </div>
@@ -114,7 +121,7 @@ const Footer = ({ lang = 'en' }) => {
                             {content.links.map((link, i) => (
                                 <li key={i}>
                                     <a href="#" className="text-blue-100/70 hover:text-white transition-colors flex items-center gap-2 group text-sm font-medium">
-                                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" /> {link}
+                                        <HiOutlineArrowNarrowRight size={16} className="group-hover:translate-x-1 transition-transform" /> {link}
                                     </a>
                                 </li>
                             ))}

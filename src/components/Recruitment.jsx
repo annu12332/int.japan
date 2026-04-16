@@ -23,9 +23,9 @@ const RecruitmentSection = ({ lang = 'en' }) => {
     const content = translations[lang] || translations.en;
 
     return (
-        <section className="bg-white py-12 md:py-20 px-6">
+        <section id='recruitment' className="bg-white py-12 md:py-20 px-6">
             <div className="max-w-5xl mx-auto">
-                <div className="relative group cursor-pointer overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-600 to-blue-800 p-8 md:p-12 shadow-2xl transition-all duration-500 hover:shadow-blue-200/50 hover:-translate-y-1">
+                <div className="relative group cursor-pointer overflow-hidden rounded-[2rem] bg-[#1e4b8f] p-8 md:p-12 shadow-2xl transition-all duration-500 hover:shadow-blue-200/50 hover:-translate-y-1">
 
                     {/* Background Decorative Elements */}
                     <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-all duration-500"></div>

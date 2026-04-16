@@ -73,7 +73,7 @@ const AdmissionCoursesSection = ({ lang = 'jp' }) => {
     const content = translations[lang] || translations.en;
 
     return (
-        <section className="bg-slate-50 py-12 md:py-20 px-4 font-sans text-slate-900">
+        <section id='course' className="bg-slate-50 py-12 md:py-20 px-4 font-sans text-slate-900">
             <div className="max-w-6xl mx-auto">
 
                 {/* Header Section */}

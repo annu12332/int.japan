@@ -12,12 +12,12 @@ const HeroSection = ({ lang = 'en' }) => {
             detailsTitle: "More Details Here",
             pdfNote: "* PDF files will open in a new window",
             cards: [
-                { title: 'Admission Guide', icon: '📋' },
-                { title: 'Application Form', icon: '📝' },
-                { title: 'School Rules', icon: '⚖️' },
-                { title: 'Resume Template', icon: '📄' },
-                { title: 'Career Path', icon: '🎯' },
-                { title: 'School Opening', icon: '🏫' },
+                { title: 'Admission Guide', icon: '📋', path: '/admission-guide' },
+                { title: 'Application Form', icon: '📝', path: '/application-form' },
+                { title: 'School Rules', icon: '⚖️', path: '/school-rules' },
+                { title: 'Resume Template', icon: '📄', path: '/resume' },
+                { title: 'Career Path', icon: '🎯', path: '/career' },
+                { title: 'School Opening', icon: '🏫', path: '/opening' },
             ]
         },
         bn: {
@@ -30,12 +30,12 @@ const HeroSection = ({ lang = 'en' }) => {
             detailsTitle: "আরও বিস্তারিত এখানে",
             pdfNote: "* PDF ফাইলগুলো নতুন উইন্ডোতে ওপেন হবে",
             cards: [
-                { title: 'ভর্তি নির্দেশিকা', icon: '📋' },
-                { title: 'আবেদন ফর্ম', icon: '📝' },
-                { title: 'স্কুল নিয়ম', icon: '⚖️' },
-                { title: 'জীবনবৃত্তান্ত', icon: '📄' },
-                { title: 'ক্যারিয়ার পাথ', icon: '🎯' },
-                { title: 'স্কুল ওপেনিং', icon: '🏫' },
+                { title: 'ভর্তি নির্দেশিকা', icon: '📋', path: '/admission-guide' },
+                { title: 'আবেদন ফর্ম', icon: '📝', path: '/application-form' },
+                { title: 'স্কুল নিয়ম', icon: '⚖️', path: '/school-rules' },
+                { title: 'জীবনবৃত্তান্ত', icon: '📄', path: '/resume' },
+                { title: 'ক্যারিয়ার পাথ', icon: '🎯', path: '/career' },
+                { title: 'স্কুল ওপেনিং', icon: '🏫', path: '/opening' },
             ]
         },
         jp: {
@@ -48,12 +48,12 @@ const HeroSection = ({ lang = 'en' }) => {
             detailsTitle: "詳細はこちら",
             pdfNote: "* PDFファイルは新しいウィンドウで開きます",
             cards: [
-                { title: '入学案内', icon: '📋' },
-                { title: '願書', icon: '📝' },
-                { title: '校則', icon: '⚖️' },
-                { title: '履歴書型', icon: '📄' },
-                { title: '進路', icon: '🎯' },
-                { title: '開校式', icon: '🏫' },
+                { title: '入学案内', icon: '📋', path: '/admission-guide' },
+                { title: '願書', icon: '📝', path: '/application-form' },
+                { title: '校則', icon: '⚖️', path: '/school-rules' },
+                { title: '履歴書型', icon: '📄', path: '/resume' },
+                { title: '進路', icon: '🎯', path: '/career' },
+                { title: '開校式', icon: '🏫', path: '/opening' },
             ]
         }
     };
@@ -80,16 +80,22 @@ const HeroSection = ({ lang = 'en' }) => {
                         </div>
 
                         <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-                            <button className="w-full sm:w-auto px-8 py-4 bg-[#ff6b6b] hover:bg-[#ff5252] text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg active:scale-95">
-                                {content.btnRequest}
-                            </button>
+                            <a href="#contact" className="w-full sm:w-auto">
+                                <button className="w-full sm:w-auto px-8 py-4 bg-[#ff6b6b] hover:bg-[#ff5252] text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg active:scale-95">
+                                    {content.btnRequest}
+                                </button>
+                            </a>
                             <div className="flex gap-3 w-full sm:w-auto justify-center">
-                                <button className="flex-1 sm:flex-none px-5 py-3 border-2 border-white/30 hover:border-white text-white rounded-full transition-all text-xs font-semibold">
-                                    {content.btnCourse}
-                                </button>
-                                <button className="flex-1 sm:flex-none px-5 py-3 border-2 border-white/30 hover:border-white text-white rounded-full transition-all text-xs font-semibold">
-                                    {content.btnSitemap}
-                                </button>
+                                <a href="#course" className="flex-1 sm:flex-none">
+                                    <button className="w-full px-5 py-3 border-2 border-white/30 hover:border-white text-white rounded-full transition-all text-xs font-semibold">
+                                        {content.btnCourse}
+                                    </button>
+                                </a>
+                                <a href="#sitemap" className="flex-1 sm:flex-none">
+                                    <button className="w-full px-5 py-3 border-2 border-white/30 hover:border-white text-white rounded-full transition-all text-xs font-semibold">
+                                        {content.btnSitemap}
+                                    </button>
+                                </a>
                             </div>
                         </div>
 
@@ -99,15 +105,16 @@ const HeroSection = ({ lang = 'en' }) => {
                             </div>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                                 {content.cards.map((card, index) => (
-                                    <div
-                                        key={index}
-                                        className="bg-white/5 hover:bg-white/20 p-3 rounded-xl border border-white/10 cursor-pointer transition-all group text-center"
+                                    <a 
+                                        key={index} 
+                                        href={card.path}
+                                        className="bg-white/5 hover:bg-white/20 p-3 rounded-xl border border-white/10 cursor-pointer transition-all group text-center block"
                                     >
                                         <div className="text-xl mb-1 group-hover:scale-110 transition-transform">{card.icon}</div>
                                         <p className="text-[9px] sm:text-[10px] uppercase tracking-wider text-blue-50 font-bold leading-tight">
                                             {card.title}
                                         </p>
-                                    </div>
+                                    </a>
                                 ))}
                             </div>
                             <p className="text-[10px] text-blue-200 mt-4 text-center italic">

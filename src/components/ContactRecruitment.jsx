@@ -77,7 +77,7 @@ const AccessInfo = ({ lang = 'en' }) => {
     const content = translations[lang] || translations.en;
 
     return (
-        <section className="bg-slate-50 py-12 md:py-20 px-4 font-sans">
+        <section id='access' className="bg-slate-50 py-12 md:py-20 px-4 font-sans">
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4 border-b border-slate-200 pb-6">
@@ -99,7 +99,7 @@ const AccessInfo = ({ lang = 'en' }) => {
                     {content.locs.map((loc, i) => (
                         <div key={i} className="group relative bg-white rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 overflow-hidden">
                             {/* Theme Indicator */}
-                            <div className={`absolute top-0 left-0 w-1.5 h-full ${loc.theme === 'blue' ? 'bg-blue-600' : 'bg-red-600'}`}></div>
+                            <div className={`absolute top-0 left-0 w-1.5 h-full ${loc.theme === 'blue' ? 'bg-[#1e4b8f]' : 'bg-red-600'}`}></div>
                             
                             <div className="flex justify-between items-start mb-6">
                                 <div className={`p-3 rounded-2xl ${loc.theme === 'blue' ? 'bg-blue-50 text-blue-600' : 'bg-red-50 text-red-600'}`}>
@@ -133,7 +133,7 @@ const AccessInfo = ({ lang = 'en' }) => {
 
                             <button className={`w-full py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
                                 loc.theme === 'blue' 
-                                ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-100' 
+                                ? 'bg-[#1e4b8f] text-white hover:bg-blue-700 shadow-lg shadow-blue-100' 
                                 : 'bg-slate-900 text-white hover:bg-red-600 shadow-lg shadow-slate-200'
                             }`}>
                                 {content.btn} <ChevronRight size={14} />
