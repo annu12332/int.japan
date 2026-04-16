@@ -9,6 +9,10 @@ import ClassSchedule from './components/Schedule';
 import CurriculumSection from './components/Curriculum';
 import ExcellenceSection from './components/StudentSuccess';
 import WhyChooseSection from './components/WhyChooseUs';
+import AdmissionCoursesSection from './components/CourceIntro';
+import ContactRecruitmentSection from './components/ContactRecruitment';
+import ContactCTA from './components/CTA';
+import Footer from './shared components/Footer';
 
 function App() {
   const [currentLang, setCurrentLang] = useState('en');
@@ -29,6 +33,11 @@ function App() {
       <CurriculumSection lang={currentLang} />
       <ExcellenceSection lang={currentLang} />
       <WhyChooseSection lang={currentLang} />
+      <AdmissionCoursesSection lang={currentLang} />
+      <ContactRecruitmentSection lang={currentLang} />
+      <ContactCTA lang={currentLang} />
+      <Footer lang={currentLang} />
+
 
 
 
