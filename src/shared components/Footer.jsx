@@ -6,7 +6,7 @@ import {
     HiOutlineExternalLink, 
     HiOutlineArrowNarrowRight 
 } from "react-icons/hi";
-import { FaFacebookF, FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaWhatsapp,  } from "react-icons/fa";
 
 const Footer = ({ lang = 'en' }) => {
     const translations = {
@@ -58,11 +58,11 @@ const Footer = ({ lang = 'en' }) => {
                             {content.slogan}
                         </p>
                         <div className="flex gap-4 pt-2">
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-red-500 transition-colors">
+                            <a href="https://www.facebook.com/profile.php?id=61581829421561" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-red-500 transition-colors">
                                 <FaFacebookF size={18} />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-red-500 transition-colors">
-                                <FaYoutube size={20} />
+                            <a href="https://wa.me/8801942348132" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-red-500 transition-colors">
+                                <FaWhatsapp size={20} />
                             </a>
                         </div>
                     </div>
