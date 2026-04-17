@@ -1,24 +1,16 @@
 import React, { useState } from 'react';
-import { Printer, User, GraduationCap, Briefcase, Award, PenTool, Camera, MapPin, Phone, Mail } from 'lucide-react';
+import { 
+    Printer, User, GraduationCap, Briefcase, Award, 
+    PenTool, Camera, MapPin, Phone, Mail, Plus, Trash2 
+} from 'lucide-react';
 
 const INTJapanFullResume = ({ lang = 'en' }) => {
-    // Protiti field-er jonno state management
     const [formData, setFormData] = useState({
         name: '', furigana: '', dob: '', gender: '', address: '',
         phone: '', mobile: '', email: '', motivation: '',
-        education: [
-            { ym: '', school: '', status: '' },
-            { ym: '', school: '', status: '' },
-            { ym: '', school: '', status: '' }
-        ],
-        work: [
-            { ym: '', company: '', status: '' },
-            { ym: '', company: '', status: '' }
-        ],
-        qualifications: [
-            { ym: '', title: '', acquisition: '' },
-            { ym: '', title: '', acquisition: '' }
-        ]
+        education: [{ ym: '', school: '', status: '' }],
+        work: [{ ym: '', company: '', status: '' }],
+        qualifications: [{ ym: '', title: '', acquisition: '' }]
     });
 
     const [photo, setPhoto] = useState(null);
@@ -39,7 +31,8 @@ const INTJapanFullResume = ({ lang = 'en' }) => {
                 phone: "Phone Number", mobile: "Mobile Phones", email: "Email Address",
                 ym: "Year & Month", school: "School Name", status: "Enrollment/Graduation",
                 company: "Company Name & Occupation", joinLeave: "Joining/Leaving",
-                license: "Qualifications and Licenses", acquisition: "Acquisition"
+                license: "Qualifications and Licenses", acquisition: "Acquisition",
+                addMore: "Add Entry"
             },
             print: "Download PDF"
         },
@@ -58,7 +51,8 @@ const INTJapanFullResume = ({ lang = 'en' }) => {
                 phone: "ফোন নম্বর", mobile: "মোবাইল নম্বর", email: "ইমেইল ঠিকানা",
                 ym: "বছর ও মাস", school: "শিক্ষা প্রতিষ্ঠানের নাম", status: "ভর্তি/সমাপ্তি",
                 company: "কোম্পানির নাম ও পদবী", joinLeave: "যোগদান/ত্যাগ",
-                license: "যোগ্যতা এবং লাইসেন্স", acquisition: "অর্জনের তারিখ"
+                license: "যোগ্যতা এবং লাইসেন্স", acquisition: "অর্জনের তারিখ",
+                addMore: "নতুন তথ্য যোগ করুন"
             },
             print: "পিডিএফ ডাউনলোড"
         },
@@ -77,7 +71,8 @@ const INTJapanFullResume = ({ lang = 'en' }) => {
                 phone: "電話番号", mobile: "携帯電話", email: "メールアドレス",
                 ym: "年月", school: "学校名", status: "入学・卒業",
                 company: "企業名・職種", joinLeave: "入社・退社",
-                license: "免許・資格", acquisition: "取得"
+                license: "免許・資格", acquisition: "取得",
+                addMore: "追加"
             },
             print: "PDF保存"
         }
@@ -96,194 +91,241 @@ const INTJapanFullResume = ({ lang = 'en' }) => {
         setFormData({ ...formData, [type]: newData });
     };
 
-    return (
-        <div className="bg-gray-100 min-h-screen py-8 px-4 font-sans">
-            <div className="max-w-[850px] mx-auto bg-white shadow-2xl p-10 md:p-14 border border-slate-200 print:shadow-none print:border-none print:p-0">
-                
-                {/* 1. Header & Photo */}
-                <div className="flex justify-between items-start mb-8">
-                    <div className="border-l-8 border-[#1A3673] pl-4">
-                        <h1 className="text-4xl font-black text-[#1A3673] tracking-tighter">RESUME</h1>
-                        <p className="text-xs font-bold text-[#EE1D23] uppercase tracking-widest">{t.title}</p>
-                    </div>
-                    <label className="w-32 h-40 border-2 border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center rounded cursor-pointer relative overflow-hidden print:border-solid">
-                        <input type="file" className="hidden" onChange={handlePhotoChange} />
-                        {photo ? <img src={photo} className="w-full h-full object-cover" alt="User" /> : 
-                        <div className="text-center text-slate-400 p-2"><Camera size={24} className="mx-auto mb-1"/> <span className="text-[10px] font-bold">PHOTO</span></div>}
-                    </label>
-                </div>
+    const addField = (type) => {
+        const schemas = {
+            education: { ym: '', school: '', status: '' },
+            work: { ym: '', company: '', status: '' },
+            qualifications: { ym: '', title: '', acquisition: '' }
+        };
+        setFormData({ ...formData, [type]: [...formData[type], schemas[type]] });
+    };
 
-                {/* 2. Basic Info Section */}
-                <div className="mb-8">
-                    <h2 className="flex items-center gap-2 text-xs font-black bg-slate-100 p-2 text-[#1A3673] uppercase mb-4 border-r-4 border-[#EE1D23]">
-                        <User size={14}/> {t.basicInfo}
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
-                        <InputBox label={t.labels.name} value={formData.name} onChange={(v) => setFormData({...formData, name: v})} />
-                        <InputBox label={t.labels.furigana} value={formData.furigana} onChange={(v) => setFormData({...formData, furigana: v})} />
-                        
-                        <div className="flex gap-4">
-                            <InputBox label={t.labels.dob} value={formData.dob} onChange={(v) => setFormData({...formData, dob: v})} />
-                            <div className="flex flex-col flex-1">
-                                <label className="text-[10px] font-bold text-slate-500 uppercase">{t.labels.gender}</label>
-                                <div className="flex gap-4 mt-2">
-                                    <label className="text-xs font-bold flex items-center gap-1 cursor-pointer"><input type="radio" name="g" onChange={() => setFormData({...formData, gender: 'male'})}/> {t.labels.male}</label>
-                                    <label className="text-xs font-bold flex items-center gap-1 cursor-pointer"><input type="radio" name="g" onChange={() => setFormData({...formData, gender: 'female'})}/> {t.labels.female}</label>
+    const removeField = (type, index) => {
+        if (formData[type].length > 1) {
+            const newData = formData[type].filter((_, i) => i !== index);
+            setFormData({ ...formData, [type]: newData });
+        }
+    };
+
+    return (
+        <div className="bg-[#f0f2f5] min-h-screen py-10 px-4 font-sans print:p-0 print:bg-white">
+            <div className="max-w-[900px] mx-auto bg-white shadow-2xl rounded-xl overflow-hidden print:shadow-none print:rounded-none print:max-w-full">
+                
+                {/* Visual Accent Bar */}
+                <div className="h-2 bg-gradient-to-r from-[#1A3673] via-[#EE1D23] to-[#1A3673] print:hidden"></div>
+
+                <div className="p-8 md:p-12">
+                    {/* Header & Photo */}
+                    <div className="flex justify-between items-start mb-10 border-b border-slate-100 pb-8">
+                        <div>
+                            <h1 className="text-5xl font-black text-[#1A3673] tracking-tighter mb-1">RESUME</h1>
+                            <p className="text-sm font-bold text-[#EE1D23] uppercase tracking-[0.2em]">{t.title}</p>
+                        </div>
+                        <label className="group w-32 h-40 border-2 border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center rounded-lg cursor-pointer relative overflow-hidden transition-all hover:border-[#1A3673] print:border-solid print:rounded-none">
+                            <input type="file" className="hidden" onChange={handlePhotoChange} />
+                            {photo ? <img src={photo} className="w-full h-full object-cover" alt="User" /> : 
+                            <div className="text-center text-slate-400 group-hover:text-[#1A3673] transition-colors">
+                                <Camera size={32} className="mx-auto mb-2 opacity-50"/> 
+                                <span className="text-[10px] font-bold">UPLOAD PHOTO</span>
+                            </div>}
+                        </label>
+                    </div>
+
+                    {/* Basic Info Section */}
+                    <section className="mb-10">
+                        <SectionHeader icon={<User size={16}/>} title={t.basicInfo} />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                            <InputBox label={t.labels.name} value={formData.name} onChange={(v) => setFormData({...formData, name: v})} />
+                            <InputBox label={t.labels.furigana} value={formData.furigana} onChange={(v) => setFormData({...formData, furigana: v})} />
+                            
+                            <div className="flex gap-6">
+                                <InputBox label={t.labels.dob} placeholder="YYYY-MM-DD" value={formData.dob} onChange={(v) => setFormData({...formData, dob: v})} />
+                                <div className="flex flex-col flex-1">
+                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">{t.labels.gender}</label>
+                                    <div className="flex gap-4 h-full items-center">
+                                        <label className="text-sm font-bold flex items-center gap-2 cursor-pointer text-slate-700">
+                                            <input type="radio" name="g" className="accent-[#1A3673] w-4 h-4" onChange={() => setFormData({...formData, gender: 'male'})}/> {t.labels.male}
+                                        </label>
+                                        <label className="text-sm font-bold flex items-center gap-2 cursor-pointer text-slate-700">
+                                            <input type="radio" name="g" className="accent-[#1A3673] w-4 h-4" onChange={() => setFormData({...formData, gender: 'female'})}/> {t.labels.female}
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
+
+                            <InputBox label={t.labels.email} icon={<Mail size={12}/>} value={formData.email} onChange={(v) => setFormData({...formData, email: v})} />
+                            <InputBox label={t.labels.phone} icon={<Phone size={12}/>} value={formData.phone} onChange={(v) => setFormData({...formData, phone: v})} />
+                            <InputBox label={t.labels.mobile} icon={<Phone size={12}/>} value={formData.mobile} onChange={(v) => setFormData({...formData, mobile: v})} />
+                            
+                            <div className="md:col-span-2">
+                                <InputBox label={t.labels.address} icon={<MapPin size={12}/>} value={formData.address} onChange={(v) => setFormData({...formData, address: v})} />
+                            </div>
                         </div>
+                    </section>
 
-                        <InputBox label={t.labels.email} value={formData.email} onChange={(v) => setFormData({...formData, email: v})} />
-                        <InputBox label={t.labels.phone} value={formData.phone} onChange={(v) => setFormData({...formData, phone: v})} />
-                        <InputBox label={t.labels.mobile} value={formData.mobile} onChange={(v) => setFormData({...formData, mobile: v})} />
-                        
-                        <div className="md:col-span-2">
-                            <InputBox label={t.labels.address} value={formData.address} onChange={(v) => setFormData({...formData, address: v})} />
-                        </div>
-                    </div>
-                </div>
-
-                {/* 3. Education Section */}
-                <div className="mb-8">
-                    <h2 className="flex items-center gap-2 text-xs font-black bg-slate-100 p-2 text-[#1A3673] uppercase mb-2 border-r-4 border-[#EE1D23]">
-                        <GraduationCap size={14}/> {t.eduInfo}
-                    </h2>
-                    <table className="w-full text-left">
-                        <thead>
-                            <tr className="text-[10px] text-slate-400 uppercase">
-                                <th className="py-2 w-1/4">{t.labels.ym}</th>
-                                <th className="py-2 w-1/2">{t.labels.school}</th>
-                                <th className="py-2">{t.labels.status}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {formData.education.map((item, i) => (
-                                <tr key={i} className="border-b border-slate-100">
-                                    <td><input className="print-input w-full" placeholder="YYYY/MM" value={item.ym} onChange={(e) => updateArrayField('education', i, 'ym', e.target.value)} /></td>
-                                    <td><input className="print-input w-full" value={item.school} onChange={(e) => updateArrayField('education', i, 'school', e.target.value)} /></td>
-                                    <td><input className="print-input w-full" value={item.status} onChange={(e) => updateArrayField('education', i, 'status', e.target.value)} /></td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-
-                {/* 4. Work Experience Section */}
-                <div className="mb-8">
-                    <h2 className="flex items-center gap-2 text-xs font-black bg-slate-100 p-2 text-[#1A3673] uppercase mb-2 border-r-4 border-[#EE1D23]">
-                        <Briefcase size={14}/> {t.workInfo}
-                    </h2>
-                    <table className="w-full text-left">
-                        <thead>
-                            <tr className="text-[10px] text-slate-400 uppercase">
-                                <th className="py-2 w-1/4">{t.labels.ym}</th>
-                                <th className="py-2 w-1/2">{t.labels.company}</th>
-                                <th className="py-2">{t.labels.joinLeave}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {formData.work.map((item, i) => (
-                                <tr key={i} className="border-b border-slate-100">
-                                    <td><input className="print-input w-full" value={item.ym} onChange={(e) => updateArrayField('work', i, 'ym', e.target.value)} /></td>
-                                    <td><input className="print-input w-full" value={item.company} onChange={(e) => updateArrayField('work', i, 'company', e.target.value)} /></td>
-                                    <td><input className="print-input w-full" value={item.status} onChange={(e) => updateArrayField('work', i, 'status', e.target.value)} /></td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-
-                {/* 5. Qualifications & Licenses Section (Full Field Added) */}
-                <div className="mb-8">
-                    <h2 className="flex items-center gap-2 text-xs font-black bg-slate-100 p-2 text-[#1A3673] uppercase mb-2 border-r-4 border-[#EE1D23]">
-                        <Award size={14}/> {t.qualInfo}
-                    </h2>
-                    <table className="w-full text-left">
-                        <thead>
-                            <tr className="text-[10px] text-slate-400 uppercase">
-                                <th className="py-2 w-1/4">{t.labels.ym}</th>
-                                <th className="py-2 w-1/2">{t.labels.license}</th>
-                                <th className="py-2">{t.labels.acquisition}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {formData.qualifications.map((item, i) => (
-                                <tr key={i} className="border-b border-slate-100">
-                                    <td><input className="print-input w-full" value={item.ym} onChange={(e) => updateArrayField('qualifications', i, 'ym', e.target.value)} /></td>
-                                    <td><input className="print-input w-full" value={item.title} onChange={(e) => updateArrayField('qualifications', i, 'title', e.target.value)} /></td>
-                                    <td><input className="print-input w-full" value={item.acquisition} onChange={(e) => updateArrayField('qualifications', i, 'acquisition', e.target.value)} /></td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-
-                {/* 6. Motivation & Self-Promotion Section */}
-                <div className="mb-10">
-                    <h2 className="flex items-center gap-2 text-xs font-black bg-slate-100 p-2 text-[#1A3673] uppercase mb-3 border-r-4 border-[#EE1D23]">
-                        <PenTool size={14}/> {t.motivation}
-                    </h2>
-                    <textarea 
-                        className="w-full h-36 p-4 bg-slate-50 border border-slate-200 rounded-lg text-[13px] font-medium outline-none focus:ring-1 focus:ring-[#1A3673] print:bg-white print:border-none print:p-0 resize-none"
-                        value={formData.motivation}
-                        onChange={(e) => setFormData({...formData, motivation: e.target.value})}
+                    {/* Dynamic Sections Helper */}
+                    <DynamicTable 
+                        title={t.eduInfo} 
+                        icon={<GraduationCap size={16}/>}
+                        headers={[t.labels.ym, t.labels.school, t.labels.status]}
+                        data={formData.education}
+                        type="education"
+                        onUpdate={updateArrayField}
+                        onAdd={() => addField('education')}
+                        onRemove={(i) => removeField('education', i)}
+                        t={t}
                     />
-                </div>
 
-                {/* 7. Footer & Signature */}
-                <div className="flex justify-between items-end border-t pt-6 border-slate-100">
-                    <div className="text-[9px] text-slate-400 italic max-w-[350px]">
-                        {t.pdfMethod}
-                    </div>
-                    <div className="text-right">
-                        <p className="text-[10px] font-black text-slate-400 uppercase mb-8">{t.signature}</p>
-                        <div className="w-48 border-b-2 border-slate-900"></div>
-                    </div>
-                </div>
+                    <DynamicTable 
+                        title={t.workInfo} 
+                        icon={<Briefcase size={16}/>}
+                        headers={[t.labels.ym, t.labels.company, t.labels.joinLeave]}
+                        data={formData.work}
+                        type="work"
+                        onUpdate={updateArrayField}
+                        onAdd={() => addField('work')}
+                        onRemove={(i) => removeField('work', i)}
+                        t={t}
+                    />
 
-                {/* Print Button */}
-                <div className="mt-12 flex justify-center print:hidden">
-                    <button 
-                        onClick={() => window.print()} 
-                        className="bg-[#1A3673] text-white px-12 py-4 rounded-full font-black text-xs uppercase tracking-widest flex items-center gap-3 hover:bg-[#EE1D23] transition-all shadow-xl active:scale-95"
-                    >
-                        <Printer size={18} /> {t.print}
-                    </button>
+                    <DynamicTable 
+                        title={t.qualInfo} 
+                        icon={<Award size={16}/>}
+                        headers={[t.labels.ym, t.labels.license, t.labels.acquisition]}
+                        data={formData.qualifications}
+                        type="qualifications"
+                        keys={['ym', 'title', 'acquisition']}
+                        onUpdate={updateArrayField}
+                        onAdd={() => addField('qualifications')}
+                        onRemove={(i) => removeField('qualifications', i)}
+                        t={t}
+                    />
+
+                    {/* Motivation Section */}
+                    <section className="mb-10">
+                        <SectionHeader icon={<PenTool size={16}/>} title={t.motivation} />
+                        <textarea 
+                            className="w-full h-40 p-5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#1A3673]/20 focus:border-[#1A3673] transition-all print:bg-white print:border-slate-300 print:h-auto print:min-h-[150px] resize-none"
+                            placeholder="Write here..."
+                            value={formData.motivation}
+                            onChange={(e) => setFormData({...formData, motivation: e.target.value})}
+                        />
+                    </section>
+
+                    {/* Footer & Signature */}
+                    <div className="flex flex-col md:flex-row justify-between items-center md:items-end border-t pt-10 border-slate-100 gap-8">
+                        <div className="text-[11px] text-slate-400 italic max-w-[400px] leading-relaxed text-center md:text-left">
+                            {t.pdfMethod}
+                        </div>
+                        <div className="text-right min-w-[200px]">
+                            <p className="text-[10px] font-black text-slate-400 uppercase mb-10 tracking-widest">{t.signature}</p>
+                            <div className="w-full border-b-2 border-slate-900"></div>
+                        </div>
+                    </div>
+
+                    {/* Print Button */}
+                    <div className="mt-16 flex justify-center print:hidden">
+                        <button 
+                            onClick={() => window.print()} 
+                            className="group bg-[#1A3673] text-white px-10 py-4 rounded-full font-black text-sm uppercase tracking-widest flex items-center gap-3 hover:bg-[#EE1D23] transition-all hover:scale-105 shadow-2xl active:scale-95"
+                        >
+                            <Printer size={20} className="group-hover:animate-bounce" /> {t.print}
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <style jsx>{`
-                .print-input {
-                    padding: 10px 4px;
-                    border: none;
-                    outline: none;
-                    font-size: 13px;
-                    font-weight: 600;
-                    color: #334155;
-                    background: transparent;
-                }
-                .print-input::placeholder { color: #cbd5e1; font-weight: 400; }
                 @media print {
-                    .print-input { padding: 8px 0; }
-                    body { background: white; }
-                    .bg-slate-50 { background: white !important; }
-                    .bg-gray-100 { background: white !important; }
+                    body { background: white !important; }
+                    .print-hidden { display: none !important; }
+                    textarea { border: 1px solid #e2e8f0 !important; }
                 }
             `}</style>
         </div>
     );
 };
 
-const InputBox = ({ label, value, onChange }) => (
-    <div className="flex flex-col w-full border-b border-slate-200 focus-within:border-[#1A3673] transition-all">
-        <label className="text-[10px] font-black text-slate-400 uppercase mb-1">{label}</label>
-        <input 
-            type="text" 
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            className="w-full py-2 outline-none text-[13px] font-semibold text-slate-800 bg-transparent" 
-        />
+// --- Sub-Components for cleaner code ---
+
+const SectionHeader = ({ icon, title }) => (
+    <h2 className="flex items-center gap-3 text-[11px] font-black bg-slate-50 p-3 text-[#1A3673] uppercase mb-6 border-l-4 border-[#EE1D23] rounded-r-lg">
+        {icon} <span className="tracking-widest">{title}</span>
+    </h2>
+);
+
+const InputBox = ({ label, value, onChange, icon, placeholder }) => (
+    <div className="flex flex-col w-full group">
+        <label className="text-[10px] font-black text-slate-400 uppercase mb-1.5 tracking-wider transition-colors group-focus-within:text-[#1A3673]">
+            {label}
+        </label>
+        <div className="relative">
+            {icon && <div className="absolute left-0 top-1/2 -translate-y-1/2 text-slate-300">{icon}</div>}
+            <input 
+                type="text" 
+                placeholder={placeholder}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className={`w-full py-2 border-b-2 border-slate-100 outline-none text-sm font-bold text-slate-800 bg-transparent transition-all focus:border-[#1A3673] ${icon ? 'pl-6' : ''}`} 
+            />
+        </div>
     </div>
 );
+
+const DynamicTable = ({ title, icon, headers, data, type, onUpdate, onAdd, onRemove, t, keys }) => {
+    const dataKeys = keys || (type === 'education' ? ['ym', 'school', 'status'] : type === 'work' ? ['ym', 'company', 'status'] : ['ym', 'title', 'acquisition']);
+    
+    return (
+        <section className="mb-10">
+            <div className="flex justify-between items-center mb-4">
+                <SectionHeader icon={icon} title={title} />
+                <button 
+                    onClick={onAdd}
+                    className="print:hidden flex items-center gap-1 text-[10px] font-bold bg-[#1A3673]/10 text-[#1A3673] px-3 py-1.5 rounded-full hover:bg-[#1A3673] hover:text-white transition-all mb-4"
+                >
+                    <Plus size={14} /> {t.labels.addMore}
+                </button>
+            </div>
+            <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                    <thead>
+                        <tr className="text-[10px] text-slate-400 uppercase tracking-widest border-b border-slate-100">
+                            {headers.map((h, i) => (
+                                <th key={i} className={`pb-2 font-black ${i === 1 ? 'w-1/2' : 'w-1/4'}`}>{h}</th>
+                            ))}
+                            <th className="w-10 print:hidden"></th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-50">
+                        {data.map((item, i) => (
+                            <tr key={i} className="group">
+                                {dataKeys.map((key) => (
+                                    <td key={key} className="py-2 pr-4">
+                                        <input 
+                                            className="w-full bg-transparent outline-none text-sm font-semibold text-slate-700 py-1 border-b border-transparent focus:border-[#1A3673] transition-all" 
+                                            value={item[key]} 
+                                            placeholder="..."
+                                            onChange={(e) => onUpdate(type, i, key, e.target.value)} 
+                                        />
+                                    </td>
+                                ))}
+                                <td className="py-2 text-right print:hidden">
+                                    {data.length > 1 && (
+                                        <button 
+                                            onClick={() => onRemove(i)}
+                                            className="text-slate-300 hover:text-red-500 transition-colors"
+                                        >
+                                            <Trash2 size={16} />
+                                        </button>
+                                    )}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    );
+};
 
 export default INTJapanFullResume;
