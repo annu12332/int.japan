@@ -27,6 +27,9 @@ import AdmissionRegulations from './Pages/AdmissionRegulation';
 import INTJapanResumePage from './Pages/Resume';
 import INTCareerPathPage from './Pages/CareerPath';
 import INTJapanSchoolOpenPage from './Pages/SchoolOpening';
+import NoticePage from './Pages/Notice';
+import EventsPage from './Pages/Events';
+import HolidayPage from './Pages/Holidays';
 
 function App() {
   const [currentLang, setCurrentLang] = useState('en');
@@ -76,6 +79,11 @@ function App() {
           <Route path="/resume" element={<INTJapanResumePage lang={currentLang} />} />
           <Route path="/career" element={<INTCareerPathPage lang={currentLang} />} />
           <Route path="/opening" element={<INTJapanSchoolOpenPage lang={currentLang} />} />
+
+
+          <Route path="/notice" element={<NoticePage lang={currentLang} />} />
+          <Route path="/events" element={<EventsPage lang={currentLang} />} />
+          <Route path="/holidays" element={<HolidayPage lang={currentLang} />} />
 
 
           {/* 404 Route */}

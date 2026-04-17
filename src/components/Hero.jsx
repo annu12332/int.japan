@@ -18,6 +18,9 @@ const HeroSection = ({ lang = 'en' }) => {
                 { title: 'Resume Template', icon: '📄', path: '/resume' },
                 { title: 'Career Path', icon: '🎯', path: '/career' },
                 { title: 'School Opening', icon: '🏫', path: '/opening' },
+                { title: 'Notice', icon: '🔔', path: '/notice' },
+                { title: 'Holidays', icon: '🌴', path: '/holidays' },
+                { title: 'Events', icon: '📅', path: '/events' },
             ]
         },
         bn: {
@@ -36,6 +39,9 @@ const HeroSection = ({ lang = 'en' }) => {
                 { title: 'জীবনবৃত্তান্ত', icon: '📄', path: '/resume' },
                 { title: 'ক্যারিয়ার পাথ', icon: '🎯', path: '/career' },
                 { title: 'স্কুল ওপেনিং', icon: '🏫', path: '/opening' },
+                { title: 'নোটিশ', icon: '🔔', path: '/notice' },
+                { title: 'ছুটির তালিকা', icon: '🌴', path: '/holidays' },
+                { title: 'ইভেন্টস', icon: '📅', path: '/events' },
             ]
         },
         jp: {
@@ -54,6 +60,9 @@ const HeroSection = ({ lang = 'en' }) => {
                 { title: '履歴書型', icon: '📄', path: '/resume' },
                 { title: '進路', icon: '🎯', path: '/career' },
                 { title: '開校式', icon: '🏫', path: '/opening' },
+                { title: 'お知らせ', icon: '🔔', path: '/notice' },
+                { title: '祝日', icon: '🌴', path: '/holidays' },
+                { title: 'イベント', icon: '📅', path: '/events' },
             ]
         }
     };
@@ -99,11 +108,12 @@ const HeroSection = ({ lang = 'en' }) => {
                             </div>
                         </div>
 
+                        {/* Updated More Details Card with Notice, Holidays & Events */}
                         <div className="bg-white/10 backdrop-blur-md p-5 sm:p-6 rounded-3xl border border-white/20 max-w-md mx-auto lg:mx-0 shadow-2xl">
                             <div className="flex items-center justify-center lg:justify-start gap-2 mb-4 text-white font-bold border-b border-white/10 pb-2 text-sm">
                                 <span>📂</span> {content.detailsTitle}
                             </div>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <div className="grid grid-cols-3 gap-3">
                                 {content.cards.map((card, index) => (
                                     <a 
                                         key={index} 
