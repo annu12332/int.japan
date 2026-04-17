@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HeroSection = ({ lang = 'en' }) => {
     const translations = {
@@ -71,12 +72,13 @@ const HeroSection = ({ lang = 'en' }) => {
 
     return (
         <section className="relative min-h-screen bg-[#1e4b8f] overflow-hidden flex items-center">
-
+            {/* Background Decoration */}
             <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-600/10 skew-x-12 transform translate-x-20 hidden lg:block"></div>
 
             <div className="max-w-7xl mx-auto px-6 py-12 md:py-20 relative z-10 w-full">
                 <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
+                    {/* Left Column: Content */}
                     <div className="flex flex-col space-y-8 order-2 lg:order-1">
                         <div className="space-y-4">
                             <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white leading-tight text-center lg:text-left transition-all duration-500">
@@ -88,6 +90,7 @@ const HeroSection = ({ lang = 'en' }) => {
                             </p>
                         </div>
 
+                        {/* CTA Buttons - Note: # links generally stay as <a>, but for pages we use Link */}
                         <div className="flex flex-wrap justify-center lg:justify-start gap-4">
                             <a href="#contact" className="w-full sm:w-auto">
                                 <button className="w-full sm:w-auto px-8 py-4 bg-[#ff6b6b] hover:bg-[#ff5252] text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg active:scale-95">
@@ -108,23 +111,23 @@ const HeroSection = ({ lang = 'en' }) => {
                             </div>
                         </div>
 
-                        {/* Updated More Details Card with Notice, Holidays & Events */}
+                        {/* Grid Cards Section - Solved 404 with <Link> */}
                         <div className="bg-white/10 backdrop-blur-md p-5 sm:p-6 rounded-3xl border border-white/20 max-w-md mx-auto lg:mx-0 shadow-2xl">
                             <div className="flex items-center justify-center lg:justify-start gap-2 mb-4 text-white font-bold border-b border-white/10 pb-2 text-sm">
                                 <span>📂</span> {content.detailsTitle}
                             </div>
                             <div className="grid grid-cols-3 gap-3">
                                 {content.cards.map((card, index) => (
-                                    <a 
+                                    <Link 
                                         key={index} 
-                                        href={card.path}
+                                        to={card.path} // changed href to to
                                         className="bg-white/5 hover:bg-white/20 p-3 rounded-xl border border-white/10 cursor-pointer transition-all group text-center block"
                                     >
                                         <div className="text-xl mb-1 group-hover:scale-110 transition-transform">{card.icon}</div>
                                         <p className="text-[9px] sm:text-[10px] uppercase tracking-wider text-blue-50 font-bold leading-tight">
                                             {card.title}
                                         </p>
-                                    </a>
+                                    </Link>
                                 ))}
                             </div>
                             <p className="text-[10px] text-blue-200 mt-4 text-center italic">
@@ -133,6 +136,7 @@ const HeroSection = ({ lang = 'en' }) => {
                         </div>
                     </div>
 
+                    {/* Right Column: Images */}
                     <div className="relative order-1 lg:order-2">
                         <div className="flex lg:flex-col gap-4 sm:gap-6 justify-center items-center">
                             <div className="w-1/2 lg:w-full max-w-[280px] lg:max-w-md transform lg:-translate-x-10 hover:translate-x-0 transition-all duration-500">
@@ -151,6 +155,7 @@ const HeroSection = ({ lang = 'en' }) => {
                             </div>
                         </div>
 
+                        {/* Glow effect */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-64 sm:h-64 bg-blue-400 rounded-full blur-[80px] sm:blur-[120px] opacity-20 -z-10"></div>
                     </div>
 
