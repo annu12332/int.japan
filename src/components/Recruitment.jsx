@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react'; // lucide-react ব্যবহার করা হয়েছে আইকনের জন্য
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
 const RecruitmentSection = ({ lang = 'en' }) => {
     const translations = {
         en: {
@@ -50,16 +51,20 @@ const RecruitmentSection = ({ lang = 'en' }) => {
 
                         {/* Right Side: Button/Arrow */}
                         <div className="flex items-center gap-4">
+                            {/* Desktop CTA */}
                             <Link to={"/teachers-requirement"}>
-                            <button className="hidden md:flex items-center gap-2 px-8 py-4 bg-white text-blue-700 font-bold rounded-xl transition-all hover:bg-red-50 hover:text-red-600 shadow-lg">
-                                {content.cta}
-                                <ArrowRight size={20} />
-                            </button></Link>
+                                <button className="hidden md:flex items-center gap-2 px-8 py-4 bg-white text-blue-700 font-bold rounded-xl transition-all hover:bg-red-50 hover:text-red-600 shadow-lg">
+                                    {content.cta}
+                                    <ArrowRight size={20} />
+                                </button>
+                            </Link>
 
-                            {/* Mobile Only Arrow */}
-                            <div className="md:hidden w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-white transition-transform group-hover:translate-x-2">
-                                <ArrowRight size={28} />
-                            </div>
+                            {/* Mobile Only Arrow Link */}
+                            <Link to={"/teachers-requirement"} className="md:hidden">
+                                <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-white transition-transform group-hover:translate-x-2">
+                                    <ArrowRight size={28} />
+                                </div>
+                            </Link>
                         </div>
 
                     </div>
@@ -67,14 +72,14 @@ const RecruitmentSection = ({ lang = 'en' }) => {
             </div>
 
             <style jsx="true">{`
-        @keyframes bounce-slow {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        .animate-bounce-slow {
-          animation: bounce-slow 3s ease-in-out infinite;
-        }
-      `}</style>
+                @keyframes bounce-slow {
+                  0%, 100% { transform: translateY(0); }
+                  50% { transform: translateY(-10px); }
+                }
+                .animate-bounce-slow {
+                  animation: bounce-slow 3s ease-in-out infinite;
+                }
+            `}</style>
         </section>
     );
 };
