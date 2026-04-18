@@ -30,6 +30,8 @@ import INTJapanSchoolOpenPage from './Pages/SchoolOpening';
 import NoticePage from './Pages/Notice';
 import EventsPage from './Pages/Events';
 import HolidayPage from './Pages/Holidays';
+import TeacherRecruitment from './Pages/TeachersRequirments';
+import HeroBanner from './components/Banner';
 
 function App() {
   const [currentLang, setCurrentLang] = useState('en');
@@ -42,6 +44,8 @@ function App() {
   const HomePage = () => (
     <>
       <HeroSection lang={currentLang} />
+      <HeroBanner lang={currentLang} />
+
       <StaffSection lang={currentLang} />
       <RecruitmentSection lang={currentLang} />
       <AdmissionsOverview lang={currentLang} />
@@ -84,6 +88,7 @@ function App() {
           <Route path="/notice" element={<NoticePage lang={currentLang} />} />
           <Route path="/events" element={<EventsPage lang={currentLang} />} />
           <Route path="/holidays" element={<HolidayPage lang={currentLang} />} />
+          <Route path="/teachers-requirement" element={<TeacherRecruitment lang={currentLang} />} />
 
 
           {/* 404 Route */}

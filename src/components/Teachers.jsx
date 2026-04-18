@@ -1,6 +1,9 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
+import image3 from '../assets/image3.png'
+import image4 from '../assets/image4.png'
+
 
 // Swiper styles
 import 'swiper/css';
@@ -16,12 +19,12 @@ const StaffSection = ({ lang = 'en' }) => {
                 {
                     title: "Guidance by Veteran Instructors",
                     desc: "Senior instructors with extensive experience provide careful guidance tailored to each student's goals. Expertise supports reliable Japanese acquisition.",
-                    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600",
+                    image: image3,
                 },
                 {
                     title: "Friendly and Warm Instruction",
                     desc: "Students learn in a friendly atmosphere with close teacher relationships. Support covers Japanese culture and lifestyle for focused learning.",
-                    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600",
+                    image: image4,
                 }
             ]
         },
@@ -32,12 +35,12 @@ const StaffSection = ({ lang = 'en' }) => {
                 {
                     title: "অভিজ্ঞ প্রশিক্ষকদের নির্দেশনা",
                     desc: "দীর্ঘ অভিজ্ঞতাসম্পন্ন সিনিয়র প্রশিক্ষকগণ শিক্ষার্থীদের লক্ষ্য অনুযায়ী যত্নশীল নির্দেশনা দেন। দক্ষতা নির্ভরযোগ্য জাপানি ভাষা অর্জনকে সহায়তা করে।",
-                    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600",
+                    image: image3,
                 },
                 {
                     title: "বন্ধুত্বপূর্ণ এবং আন্তরিক পাঠদান",
                     desc: "শিক্ষার্থীরা বন্ধুত্বপূর্ণ পরিবেশে ঘনিষ্ঠ শিক্ষক সম্পর্কের মাধ্যমে শেখে। মনোযোগ সহকারে শেখার জন্য সাপোর্ট জাপানি সংস্কৃতি ও জীবনধারা কভার করে।",
-                    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600",
+                    image: image4,
                 }
             ]
         },
@@ -48,12 +51,12 @@ const StaffSection = ({ lang = 'en' }) => {
                 {
                     title: "ベテラン講師による指導",
                     desc: "豊富な経験を持つベテラン講師が、生徒一人ひとりの目標に合わせた丁寧な指導を行います。教育の専門知識が、確実な日本語習得をサポートします。",
-                    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600",
+                    image:image3, 
                 },
                 {
                     title: "親身で温かい指導",
                     desc: "生徒は教師との距離が近い、アットホームな雰囲気の中で学ぶことができます。日本語の指導だけでなく、日本の文化や生活面についてもきめ細かくサポートします。",
-                    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600",
+                    image: image4,
                 }
             ]
         }

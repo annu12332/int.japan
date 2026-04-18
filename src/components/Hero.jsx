@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import image1 from '../assets/image.png'
+import image2 from '../assets/image2.png'
+
 
 const HeroSection = ({ lang = 'en' }) => {
     const translations = {
@@ -90,7 +93,6 @@ const HeroSection = ({ lang = 'en' }) => {
                             </p>
                         </div>
 
-                        {/* CTA Buttons - Note: # links generally stay as <a>, but for pages we use Link */}
                         <div className="flex flex-wrap justify-center lg:justify-start gap-4">
                             <a href="#contact" className="w-full sm:w-auto">
                                 <button className="w-full sm:w-auto px-8 py-4 bg-[#ff6b6b] hover:bg-[#ff5252] text-white font-bold rounded-full transition-all transform hover:scale-105 shadow-lg active:scale-95">
@@ -141,14 +143,14 @@ const HeroSection = ({ lang = 'en' }) => {
                         <div className="flex lg:flex-col gap-4 sm:gap-6 justify-center items-center">
                             <div className="w-1/2 lg:w-full max-w-[280px] lg:max-w-md transform lg:-translate-x-10 hover:translate-x-0 transition-all duration-500">
                                 <img
-                                    src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=600"
+                                    src={image1}
                                     alt="Students"
                                     className="rounded-2xl lg:rounded-[2rem] shadow-2xl border-4 lg:border-8 border-white/10 w-full aspect-square lg:aspect-auto lg:h-64 object-cover"
                                 />
                             </div>
                             <div className="w-1/2 lg:w-full max-w-[280px] lg:max-w-md transform lg:translate-x-10 hover:translate-x-0 transition-all duration-500 mt-6 lg:mt-0">
                                 <img
-                                    src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=600"
+                                    src={image2}
                                     alt="Teacher"
                                     className="rounded-2xl lg:rounded-[2rem] shadow-2xl border-4 lg:border-8 border-white/10 w-full aspect-square lg:max-w-md lg:h-64 object-cover"
                                 />
